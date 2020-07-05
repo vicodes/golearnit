@@ -1,0 +1,5 @@
+com/golearnit/app/modules/quiz/service/impl/QuizServiceImpl.class
+com/golearnit/app/modules/quiz/config/QuizModuleConfig.class
+com/golearnit/app/modules/quiz/service/QuizService.class
+com/golearnit/app/modules/quiz/controller/QuizController.class
+com/golearnit/app/GoLearnItApplication.class
