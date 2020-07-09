@@ -5,7 +5,6 @@ import com.golearnit.app.modules.quiz.service.QuizService;
 import com.golearnit.data.module.quiz.dto.GetQuizResponseDto;
 import com.golearnit.data.module.quiz.dto.SubmitQuizRequestDto;
 import com.golearnit.data.module.quiz.dto.SubmitQuizResponseDto;
-import com.golearnit.data.module.quiz.entity.Quiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
