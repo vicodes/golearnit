@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration  monitorInterval="30">
+
+    <Properties>
+    <Property name="LOG_PATTERN">
+        %d{yyyy-MM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n
+    </Property>
+    </Properties>
+
+    <Appenders>
+        <!-- Console Appender -->
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+        <!-- File Appender -->
+        <RollingFile name="FileAppender" fileName="./run/logs/application.log"
+                     filePattern="run/logs/archive/application-%d{yyyy-MM-dd-hh}.log.zip">
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+            <DefaultRolloverStrategy max="50" />
+        </RollingFile>
+
+<!--        <RollingFile name="AccessLogAppender" fileName="./run/logs/access_log.log"-->
+<!--                     filePattern="run/logs/archive/access_log-%d{yyyy-MM-dd-hh}.log.zip">-->
+<!--            <PatternLayout>-->
+<!--                <Pattern>${LOG_PATTERN}</Pattern>-->
+<!--            </PatternLayout>-->
+<!--            <Policies>-->
+<!--                <TimeBasedTriggeringPolicy interval="1" modulate="true" />-->
+<!--            </Policies>-->
+<!--            <DefaultRolloverStrategy max="50" />-->
+<!--        </RollingFile>-->
+
+    </Appenders>
+
+    <Loggers>
+        <!-- Log everything in custom package -->
+        <Logger name="com.golearnit.app" level="INFO" additivity="false">
+            <AppenderRef ref="FileAppender"/>
+        </Logger>
+
+        <!-- Log everything in Spring Boot -->
+        <Logger name="org.springframework.boot" level="INFO" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="FileAppender"/>
+        </Logger>
+
+        <!-- Log everything in Spring Core -->
+        <Logger name="org.springframework.core" level="INFO" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="FileAppender"/>
+        </Logger>
+
+        <Logger name="org.springframework.boot.web.embedded.tomcat" level="INFO" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="FileAppender"/>
+        </Logger>
+        <Logger name="com.zaxxer.hikari" level="DEBUG" additivity="false">
+            <AppenderRef ref="FileAppender"/>
+        </Logger>
+        <Logger name="org.hibernate.type" level="INFO" additivity="false">
+            <AppenderRef ref="FileAppender"/>
+        </Logger>
+
+        <Logger name="org.apache.tomcat" level="DEBUG" additivity="false">
+            <AppenderRef ref="AccessLogAppender"/>
+        </Logger>
+        <Logger name="org.apache.catalina" level="DEBUG" additivity="false">
+            <AppenderRef ref="AccessLogAppender"/>
+        </Logger>
+        <Root level="error">
+            <AppenderRef ref="FileAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>

@@ -14,7 +14,7 @@ import java.util.List;
 public class QuizDaoImpl extends BaseDaoImpl<Quiz> implements QuizDAO {
 
     @Override
-    public Quiz getQuizByQuizId(Long quizId) {
+    public Quiz getQuizByQuizId(String quizId) {
         EntityManager entityManager= getEntityManager();
         String query = "select * from quiz where quiz_id=:quizId";
         Query nativeQuery = entityManager.createNativeQuery(query, Quiz.class);
@@ -24,7 +24,7 @@ public class QuizDaoImpl extends BaseDaoImpl<Quiz> implements QuizDAO {
         return quiz;
     }
     @Override
-    public List<Questionnaire> getQuestionnaireByQuizId(Long quizId) {
+    public List<Questionnaire> getQuestionnaireByQuizId(String quizId) {
         EntityManager entityManager= getEntityManager();
         String query = "select * from questionnaire where quiz_id=:quizId";
         Query nativeQuery = entityManager.createNativeQuery(query, Questionnaire.class);

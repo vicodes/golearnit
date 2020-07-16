@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface QuizDAO extends BaseDao<Quiz> {
 
-    Quiz getQuizByQuizId(Long quizId);
+    Quiz getQuizByQuizId(String quizId);
 
-    List<Questionnaire> getQuestionnaireByQuizId(Long quizId);
+    List<Questionnaire> getQuestionnaireByQuizId(String quizId);
 }

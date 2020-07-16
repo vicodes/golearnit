@@ -8,6 +8,8 @@ import com.golearnit.data.module.quiz.dto.SubmitQuizRequestDto;
 import com.golearnit.data.module.quiz.dto.SubmitQuizResponseDto;
 import com.golearnit.data.module.quiz.entity.Questionnaire;
 import com.golearnit.data.module.quiz.entity.Quiz;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +21,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class QuizServiceImpl implements QuizService {
+    private static Logger logger = LogManager.getLogger(QuizServiceImpl.class);
 
     @Autowired
     QuizDAO quizDAO;
 
     @Override
-    public GetQuizResponseDto getQuizById(Long quizId) {
+    public GetQuizResponseDto getQuizById(String quizId) {
         Quiz quiz = quizDAO.getQuizByQuizId(quizId);
         GetQuizResponseDto getQuizResponseDto = new GetQuizResponseDto();
         getQuizResponseDto.setQuizId(quiz.getQuizId());
@@ -54,7 +57,7 @@ public class QuizServiceImpl implements QuizService {
 
     private int getCorrectAnswerCount(Long quizId, List<Questions> questionsList) {
         int count;
-        List<Questionnaire> questionnaireList = quizDAO.getQuestionnaireByQuizId(quizId);
+        List<Questionnaire> questionnaireList = quizDAO.getQuestionnaireByQuizId(String.valueOf(quizId));
         Map<Long, String> queAnsMap = new HashMap<>();
         questionnaireList.forEach(questionnaire -> {
             queAnsMap.put(questionnaire.getQuestionId(),questionnaire.getAnswer());
